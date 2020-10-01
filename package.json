@@ -1,0 +1,11 @@
+{
+  "name": "sort-algo-react.git",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:arviantodwi/sort-algo-react.git",
+  "author": "Arvianto Dwi <arvianto.dwi@gmail.com>",
+  "license": "MIT",
+  "alias": {
+    "src": "./src"
+  }
+}
