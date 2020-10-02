@@ -1,5 +1,6 @@
 import React from 'react';
 import './app.scss';
+import Visualizer from './Visualizer';
 import Configurator from './Configurator';
 
 class App extends React.Component {
@@ -7,6 +8,9 @@ class App extends React.Component {
     return (
       <div className="container mx-auto min-h-screen">
         <div className="flex pt-40 pb-10 h-screen">
+          <div className="flex-auto self-stretch">
+            <Visualizer />
+          </div>
           <div className="flex-none self-start" style={{ width: '300px' }}>
             <Configurator />
           </div>
