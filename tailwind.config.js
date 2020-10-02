@@ -3,4 +3,7 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
+  variants: {
+    margin: ['odd', 'even'],
+  },
 };
