@@ -4,6 +4,6 @@ module.exports = {
     purgeLayersByDefault: true,
   },
   variants: {
-    margin: ['odd', 'even'],
+    margin: ['odd', 'even', 'first', 'last'],
   },
 };
