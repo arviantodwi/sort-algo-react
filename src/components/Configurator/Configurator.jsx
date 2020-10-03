@@ -9,31 +9,57 @@ class Configurator extends React.Component {
       rangeProgress: 0,
       rangeValue: null,
     };
-    this.handleSortButtonClick = this.handleSortButtonClick.bind(this);
+    this.rangeRef = React.createRef();
+    this.rangeAttrs = {
+      min: 4,
+      max: 200,
+      step: 4,
+    };
+    this.handleRandomizeClick = this.handleRandomizeClick.bind(this);
+    this.handleAlgoButtonClick = this.handleAlgoButtonClick.bind(this);
     this.handleRangeOnChange = this.handleRangeOnChange.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ activeSortButton: 0 });
-    const range = document.querySelector('.configurator-range input[type="range"]');
-    range.value = range.min;
-    this.setState({ rangeValue: range.value });
+    const { setArray } = this.props;
+    setArray(40);
+
+    this.rangeRef.current.value = 40;
+    this.setState({
+      activeSortButton: 0,
+      rangeProgress: (40 / this.rangeAttrs.max) * 100,
+      rangeValue: 40,
+    });
   }
 
-  handleSortButtonClick(index) {
+  handleRandomizeClick() {
+    const { setArray } = this.props;
+    setArray(this.state.rangeValue);
+  }
+
+  handleAlgoButtonClick(index) {
     if (index === this.state.activeSortButton && this.state.activeSortButton != null) return;
 
     this.setState({ activeSortButton: index });
   }
 
   handleRangeOnChange(event) {
-    const rangeProgress = document.querySelector('.configurator-range__progress-track');
-    const rangeInput = document.querySelector('.configurator-range input[type="range"]');
+    const previousValue = this.state.rangeValue;
+    const currentValue = parseInt(event.target.value);
+    let gap =
+      previousValue < currentValue ? currentValue - previousValue : previousValue - currentValue;
+
+    const { addArrayElements, reduceArrayElements } = this.props;
+    if (previousValue < currentValue) {
+      addArrayElements(gap);
+    } else {
+      reduceArrayElements(gap);
+    }
 
     this.setState({
       rangeProgress:
-        event.target.value == event.target.min ? 0 : (event.target.value / event.target.max) * 100,
-      rangeValue: rangeInput.value,
+        currentValue == this.rangeAttrs.min ? 0 : (currentValue / this.rangeAttrs.max) * 100,
+      rangeValue: currentValue,
     });
   }
 
@@ -63,7 +89,7 @@ class Configurator extends React.Component {
               key={idx}
               disabled={this.state.activeSortButton === idx}
               aria-disabled={this.state.activeSortButton === idx}
-              onClick={() => this.handleSortButtonClick(idx)}
+              onClick={() => this.handleAlgoButtonClick(idx)}
             >
               {`${item} Sort`}
             </button>
@@ -71,9 +97,17 @@ class Configurator extends React.Component {
         </div>
         <div className="px-6 pt-4 pb-2">
           <div className="configurator-range w-full">
-            <div className="text-4xl">
-              {this.state.rangeValue}&nbsp;
-              <small className="text-base text-gray-700">elements</small>
+            <div className="flex justify-between items-center">
+              <div className="text-4xl">
+                {this.state.rangeValue}&nbsp;
+                <small className="text-base text-gray-700">elements</small>
+              </div>
+              <button
+                className="bg-white hover:bg-gray-100 text-gray-800 border border-gray-400 shadow text-xs rounded-full flex-none px-2 py-1"
+                onClick={this.handleRandomizeClick}
+              >
+                Randomize
+              </button>
             </div>
             <div className="configurator-range__container">
               <div
@@ -87,9 +121,8 @@ class Configurator extends React.Component {
               <input
                 className="w-full"
                 type="range"
-                min="4"
-                max="256"
-                step="4"
+                {...this.rangeAttrs}
+                ref={this.rangeRef}
                 onChange={this.handleRangeOnChange}
               />
             </div>
