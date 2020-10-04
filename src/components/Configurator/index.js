@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { setAlgorithm } from 'src/store/reducers/algorithm';
 import { setArray } from 'src/store/reducers/array';
 import { addArrayElements } from 'src/store/reducers/array';
 import { reduceArrayElements } from 'src/store/reducers/array';
@@ -16,15 +17,8 @@ const generateArray = (length) => {
 
 const mapStateToProps = ({ array }) => ({ array });
 const mapDispatchToProps = () => (dispatch) => ({
-  setArray: (length) => {
-    dispatch(setArray(generateArray(length)));
-  },
-  addArrayElements: (length) => {
-    dispatch(addArrayElements(generateArray(length)));
-  },
-  reduceArrayElements: (length) => {
-    dispatch(reduceArrayElements(length));
-  },
+  setAlgorithm: (algo) => dispatch(setAlgorithm(algo)),
+
   setArray: (length) => dispatch(setArray(generateArray(length))),
 
   addArrayElements: (length) => dispatch(addArrayElements(generateArray(length))),

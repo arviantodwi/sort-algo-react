@@ -21,7 +21,8 @@ class Configurator extends React.Component {
   }
 
   componentDidMount() {
-    const { setArray } = this.props;
+    const { setArray, setAlgorithm } = this.props;
+    setAlgorithm('bubble');
     setArray(40);
 
     this.rangeRef.current.value = 40;
@@ -37,8 +38,11 @@ class Configurator extends React.Component {
     setArray(this.state.rangeValue);
   }
 
-  handleAlgoButtonClick(index) {
+  handleAlgoButtonClick(algo, index) {
     if (index === this.state.activeSortButton && this.state.activeSortButton != null) return;
+
+    const { setAlgorithm } = this.props;
+    setAlgorithm(algo);
 
     this.setState({ activeSortButton: index });
   }
@@ -89,7 +93,7 @@ class Configurator extends React.Component {
               key={idx}
               disabled={this.state.activeSortButton === idx}
               aria-disabled={this.state.activeSortButton === idx}
-              onClick={() => this.handleAlgoButtonClick(idx)}
+              onClick={() => this.handleAlgoButtonClick(item.toLowerCase(), idx)}
             >
               {`${item} Sort`}
             </button>
