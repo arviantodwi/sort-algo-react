@@ -25,6 +25,11 @@ const mapDispatchToProps = () => (dispatch) => ({
   reduceArrayElements: (length) => {
     dispatch(reduceArrayElements(length));
   },
+  setArray: (length) => dispatch(setArray(generateArray(length))),
+
+  addArrayElements: (length) => dispatch(addArrayElements(generateArray(length))),
+
+  reduceArrayElements: (length) => dispatch(reduceArrayElements(length)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Configurator);
