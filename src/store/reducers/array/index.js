@@ -9,7 +9,7 @@ export const reduceArrayElements = (lengthToReduce) => ({
 });
 export const setArray = (array) => ({ type: SET_ARRAY, array });
 
-export const array = (state = { array: [] }, action) => {
+export const array = (state = [], action) => {
   switch (action.type) {
     case SET_ARRAY:
       return action.array;
