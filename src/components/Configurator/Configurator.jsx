@@ -18,6 +18,7 @@ class Configurator extends React.Component {
     this.handleRandomizeClick = this.handleRandomizeClick.bind(this);
     this.handleAlgoButtonClick = this.handleAlgoButtonClick.bind(this);
     this.handleRangeOnChange = this.handleRangeOnChange.bind(this);
+    this.handleStartButtonClick = this.handleStartButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -67,6 +68,11 @@ class Configurator extends React.Component {
     });
   }
 
+  handleStartButtonClick() {
+    const { sort, array, algorithm } = this.props;
+    sort(array, algorithm);
+  }
+
   setSortButtonClassName(index) {
     const base = 'text-sm font-semibold py-2 px-4 mr-0 odd:mr-2 mb-2 rounded-full';
     const active = 'bg-blue-500 border border-blue-500 text-white opacity-50 cursor-not-allowed';
@@ -77,6 +83,7 @@ class Configurator extends React.Component {
 
   render() {
     const sortButtons = ['Bubble', 'Selection', 'Insertion', 'Merge', 'Quick', 'Heap'];
+    const { isSortRunning } = this.props;
 
     return (
       <div className="bg-white rounded shadow-lg">
@@ -131,6 +138,14 @@ class Configurator extends React.Component {
               />
             </div>
           </div>
+        </div>
+        <div className="px-6 pt-6 pb-3">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white text-xl font-bold py-3 border border-blue-700 rounded-full w-full shadow"
+            onClick={this.handleStartButtonClick}
+          >
+            {!isSortRunning ? 'Start Sorting' : 'Stop Sorting'}
+          </button>
         </div>
       </div>
     );
