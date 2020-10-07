@@ -6,12 +6,14 @@ const mapStateToProps = ({
   sortedIndexes,
   swappingIndexes,
   currentTwoBubble,
+  currentTwoSelection,
   isSortRunning,
 }) => ({
   array,
   sortedIndexes,
   swappingIndexes,
   currentTwoBubble,
+  currentTwoSelection,
   isSortRunning,
 });
 

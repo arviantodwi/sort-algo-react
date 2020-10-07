@@ -3,6 +3,7 @@ import { setAlgorithm } from 'src/store/reducers/algorithm';
 import { setArray, addArrayElements, reduceArrayElements } from 'src/store/reducers/array';
 import { toggleSortRunning } from 'src/store/reducers/misc';
 import bubbleSort from 'src/helpers/bubbleSort';
+import selectionSort from 'src/helpers/selectionSort';
 import Configurator from './Configurator';
 
 const generateArray = (length) => {
@@ -30,8 +31,7 @@ const mapDispatchToProps = () => (dispatch) => ({
   reduceArrayElements: (length) => dispatch(reduceArrayElements(length)),
 
   sort: (array, algo) => {
-    const startSorting = algo == 'bubble' ? bubbleSort : null;
-    // selection
+    const startSorting = algo == 'bubble' ? bubbleSort : algo == 'selection' ? selectionSort : null;
     // insertion
     // merge
     // quick

@@ -6,7 +6,14 @@ class Visualizer extends React.Component {
   }
 
   render() {
-    const { array, sortedIndexes, swappingIndexes, currentTwoBubble, isSortRunning } = this.props;
+    const {
+      array,
+      sortedIndexes,
+      swappingIndexes,
+      currentTwoBubble,
+      currentTwoSelection,
+      isSortRunning,
+    } = this.props;
     const sideMargin =
       array.length > 150
         ? 0.1
@@ -39,7 +46,7 @@ class Visualizer extends React.Component {
               let barColor =
                 swappingIndexes.indexOf(index) > -1
                   ? 'red'
-                  : currentTwoBubble.indexOf(index) > -1
+                  : currentTwoBubble.indexOf(index) > -1 || currentTwoSelection.indexOf(index) > -1
                   ? 'green'
                   : sortedIndexes.indexOf(index) > -1
                   ? 'purple'
