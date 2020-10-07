@@ -7,6 +7,7 @@ const mapStateToProps = ({
   swappingIndexes,
   currentTwoBubble,
   currentTwoSelection,
+  currentTwoInsertion,
   isSortRunning,
 }) => ({
   array,
@@ -14,6 +15,7 @@ const mapStateToProps = ({
   swappingIndexes,
   currentTwoBubble,
   currentTwoSelection,
+  currentTwoInsertion,
   isSortRunning,
 });
 

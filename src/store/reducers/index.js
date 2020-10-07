@@ -3,6 +3,7 @@ import { array } from './array';
 import { algorithm } from './algorithm';
 import { currentTwoBubble } from './algorithm/bubbleSort';
 import { currentTwoSelection } from './algorithm/selectionSort';
+import { currentTwoInsertion } from './algorithm/insertionSort';
 import * as misc from './misc';
 
 export default combineReducers({
@@ -10,6 +11,7 @@ export default combineReducers({
   algorithm,
   currentTwoBubble,
   currentTwoSelection,
+  currentTwoInsertion,
   isSortRunning: misc.isSortRunning,
   sortedIndexes: misc.sortedIndexes,
   swappingIndexes: misc.swappingIndexes,

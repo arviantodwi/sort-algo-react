@@ -12,6 +12,7 @@ class Visualizer extends React.Component {
       swappingIndexes,
       currentTwoBubble,
       currentTwoSelection,
+      currentTwoInsertion,
       isSortRunning,
     } = this.props;
     const sideMargin =
@@ -46,7 +47,9 @@ class Visualizer extends React.Component {
               let barColor =
                 swappingIndexes.indexOf(index) > -1
                   ? 'red'
-                  : currentTwoBubble.indexOf(index) > -1 || currentTwoSelection.indexOf(index) > -1
+                  : currentTwoBubble.indexOf(index) > -1 ||
+                    currentTwoSelection.indexOf(index) > -1 ||
+                    currentTwoInsertion.indexOf(index) > -1
                   ? 'green'
                   : sortedIndexes.indexOf(index) > -1
                   ? 'purple'

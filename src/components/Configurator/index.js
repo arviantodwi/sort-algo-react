@@ -4,6 +4,7 @@ import { setArray, addArrayElements, reduceArrayElements } from 'src/store/reduc
 import { toggleSortRunning } from 'src/store/reducers/misc';
 import bubbleSort from 'src/helpers/bubbleSort';
 import selectionSort from 'src/helpers/selectionSort';
+import insertionSort from 'src/helpers/insertionSort';
 import Configurator from './Configurator';
 
 const generateArray = (length) => {
@@ -31,8 +32,14 @@ const mapDispatchToProps = () => (dispatch) => ({
   reduceArrayElements: (length) => dispatch(reduceArrayElements(length)),
 
   sort: (array, algo) => {
-    const startSorting = algo == 'bubble' ? bubbleSort : algo == 'selection' ? selectionSort : null;
-    // insertion
+    const startSorting =
+      algo == 'bubble'
+        ? bubbleSort
+        : algo == 'selection'
+        ? selectionSort
+        : algo == 'insertion'
+        ? insertionSort
+        : null;
     // merge
     // quick
     // heap
