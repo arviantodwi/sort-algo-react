@@ -31,8 +31,13 @@ const mapDispatchToProps = () => (dispatch) => ({
 
   sort: (array, algo) => {
     const startSorting = algo == 'bubble' ? bubbleSort : null;
+    // selection
+    // insertion
+    // merge
+    // quick
+    // heap
     dispatch(toggleSortRunning());
-    startSorting(array, dispatch, 5);
+    startSorting(array, dispatch, 25);
     return;
   },
 });

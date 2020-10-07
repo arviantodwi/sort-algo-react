@@ -6,7 +6,7 @@ class Visualizer extends React.Component {
   }
 
   render() {
-    const { array } = this.props;
+    const { array, sortedIndexes, swappingIndexes, currentTwoBubble, isSortRunning } = this.props;
     const sideMargin =
       array.length > 150
         ? 0.1
@@ -35,29 +35,42 @@ class Visualizer extends React.Component {
     return (
       <div className="flex justify-center items-end w-full h-full pr-8">
         {array.length
-          ? array.map((item, index, arr) => (
-              <div
-                className="bg-blue-500 relative"
-                style={{
-                  width: `${200 / array.length}%`,
-                  maxWidth: '10%',
-                  height: `${item}%`,
-                  margin:
-                    index === 0
-                      ? `0 ${sideMargin * 10}px 0 0`
-                      : index == arr.length - 1
-                      ? `0 0 0 ${sideMargin * 10}px`
-                      : `0 ${sideMargin * 10}px`,
-                }}
-                key={index}
-              >
-                <span
-                  className={`w-full text-center inline-block absolute inset-x-0 bottom-0 leading-8 -mb-8 ${labelSize}`}
+          ? array.map((item, index, arr) => {
+              let barColor =
+                swappingIndexes.indexOf(index) > -1
+                  ? 'red'
+                  : currentTwoBubble.indexOf(index) > -1
+                  ? 'green'
+                  : sortedIndexes.indexOf(index) > -1
+                  ? 'purple'
+                  : 'blue';
+
+              return (
+                <div
+                  className={`bg-${barColor}-500 ${
+                    isSortRunning && barColor == 'blue' ? 'opacity-50' : null
+                  } relative`}
+                  style={{
+                    width: `${200 / array.length}%`,
+                    maxWidth: '10%',
+                    height: `${item}%`,
+                    margin:
+                      index === 0
+                        ? `0 ${sideMargin * 10}px 0 0`
+                        : index == arr.length - 1
+                        ? `0 0 0 ${sideMargin * 10}px`
+                        : `0 ${sideMargin * 10}px`,
+                  }}
+                  key={index}
                 >
-                  {item}
-                </span>
-              </div>
-            ))
+                  <span
+                    className={`w-full text-center inline-block absolute inset-x-0 bottom-0 leading-8 -mb-8 ${labelSize}`}
+                  >
+                    {item}
+                  </span>
+                </div>
+              );
+            })
           : 'Loading ...'}
       </div>
     );

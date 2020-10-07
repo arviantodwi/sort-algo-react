@@ -35,14 +35,23 @@ const bubbleSort = (arr, dispatch, speed) => {
 
 const handleDispatch = (toDispatch, dispatch, arr, speed) => {
   if (!toDispatch.length) {
-    dispatch(setCurrentTwoBubble(arr.map((item, idx) => idx)));
-    setTimeout(() => {
-      dispatch(setCurrentTwoBubble([]));
-      dispatch(setSorted(arr.map((item, idx) => idx)));
-      dispatch(toggleSortRunning());
-    }, 900);
+    const finalSortCheck = (arr, i, check = []) => {
+      if (i == arr.length) {
+        setTimeout(() => {
+          dispatch(setCurrentTwoBubble([]));
+          dispatch(setSorted(arr.map((item, idx) => idx)));
+          dispatch(toggleSortRunning());
+        }, 900);
+        return;
+      }
 
-    return;
+      setTimeout(() => {
+        dispatch(setCurrentTwoBubble(check.concat([i])));
+        finalSortCheck(arr, i + 1, check.concat([i]));
+      }, speed);
+    };
+
+    return finalSortCheck(arr, 0);
   }
 
   let dispatchFunction = null;
