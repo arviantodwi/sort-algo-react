@@ -21,7 +21,16 @@ export const isSortRunning = (state = false, payload) => {
 export const sortedIndexes = (state = [], payload) => {
   switch (payload.type) {
     case SET_SORTED:
-      return payload.sortedIndexes.length ? state.concat(payload.sortedIndexes) : [];
+      let indexes;
+      if (!payload.sortedIndexes.length) {
+        indexes = [];
+      } else {
+        indexes =
+          payload.sortedIndexes[0] === true
+            ? state.concat(payload.sortedIndexes.slice(1))
+            : payload.sortedIndexes;
+      }
+      return indexes;
     default:
       return state;
   }

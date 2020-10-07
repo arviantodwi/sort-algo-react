@@ -7,7 +7,7 @@ export const setCurrentTwoBubble = (twoBubbleIndexes) => ({
 
 export const currentTwoBubble = (state = [], payload) => {
   switch (payload.type) {
-    case 'SET_CURRENT_TWO_BUBBLE':
+    case SET_CURRENT_TWO_BUBBLE:
       return payload.twoBubbleIndexes;
     default:
       return state;
