@@ -4,6 +4,7 @@ import { algorithm } from './algorithm';
 import { currentTwoBubble } from './algorithm/bubbleSort';
 import { currentTwoSelection } from './algorithm/selectionSort';
 import { currentTwoInsertion } from './algorithm/insertionSort';
+import { currentTwoMerge } from './algorithm/mergeSort';
 import * as misc from './misc';
 
 export default combineReducers({
@@ -12,6 +13,7 @@ export default combineReducers({
   currentTwoBubble,
   currentTwoSelection,
   currentTwoInsertion,
+  currentTwoMerge,
   isSortRunning: misc.isSortRunning,
   sortedIndexes: misc.sortedIndexes,
   swappingIndexes: misc.swappingIndexes,

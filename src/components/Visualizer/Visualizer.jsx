@@ -13,6 +13,7 @@ class Visualizer extends React.Component {
       currentTwoBubble,
       currentTwoSelection,
       currentTwoInsertion,
+      currentTwoMerge,
       isSortRunning,
     } = this.props;
     const sideMargin =
@@ -49,7 +50,8 @@ class Visualizer extends React.Component {
                   ? 'red'
                   : currentTwoBubble.indexOf(index) > -1 ||
                     currentTwoSelection.indexOf(index) > -1 ||
-                    currentTwoInsertion.indexOf(index) > -1
+                    currentTwoInsertion.indexOf(index) > -1 ||
+                    currentTwoMerge.indexOf(index) > -1
                   ? 'green'
                   : sortedIndexes.indexOf(index) > -1
                   ? 'purple'

@@ -8,6 +8,7 @@ const mapStateToProps = ({
   currentTwoBubble,
   currentTwoSelection,
   currentTwoInsertion,
+  currentTwoMerge,
   isSortRunning,
 }) => ({
   array,
@@ -16,6 +17,7 @@ const mapStateToProps = ({
   currentTwoBubble,
   currentTwoSelection,
   currentTwoInsertion,
+  currentTwoMerge,
   isSortRunning,
 });
 

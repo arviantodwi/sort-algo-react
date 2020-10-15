@@ -5,6 +5,7 @@ import { toggleSortRunning } from 'src/store/reducers/misc';
 import bubbleSort from 'src/helpers/bubbleSort';
 import selectionSort from 'src/helpers/selectionSort';
 import insertionSort from 'src/helpers/insertionSort';
+import mergeSort from 'src/helpers/mergeSort';
 import Configurator from './Configurator';
 
 const generateArray = (length) => {
@@ -39,8 +40,9 @@ const mapDispatchToProps = () => (dispatch) => ({
         ? selectionSort
         : algo == 'insertion'
         ? insertionSort
+        : algo == 'merge'
+        ? mergeSort
         : null;
-    // merge
     // quick
     // heap
     dispatch(toggleSortRunning());
