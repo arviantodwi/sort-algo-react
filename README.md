@@ -6,6 +6,10 @@ Web application to visualize sorting algorithms using ReactJS, Redux and Tailwin
 
 ![Screenshot](https://i.imgur.com/MUEqFbr.png)
 
+### Demo
+
+[https://arviantodwi.github.io/sort-algo-react/](https://arviantodwi.github.io/sort-algo-react/)
+
 ### Prerequisites
 
 This repository use `yarn` as package manager or you can also use `npm` as an alternative. To build this app you need following dependencies:
