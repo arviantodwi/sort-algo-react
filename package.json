@@ -17,10 +17,10 @@
     "sass": "^1.26.11"
   },
   "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
-    "tailwindcss": "^1.8.10"
+    "tailwindcss": "^1.9.6"
   }
 }
