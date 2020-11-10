@@ -82,7 +82,8 @@ class Configurator extends React.Component {
   }
 
   render() {
-    const sortButtons = ['Bubble', 'Selection', 'Insertion', 'Merge', 'Quick', 'Heap'];
+    // Not implemented yet => ['Quick', 'Heap'];
+    const sortButtons = ['Bubble', 'Selection', 'Insertion', 'Merge'];
     const { isSortRunning } = this.props;
 
     return (
