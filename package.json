@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:arviantodwi/sort-algo-react.git",
+  "homepage": "https://arviantodwi.github.io/sort-algo-react/",
   "author": "Arvianto Dwi <arvianto.dwi@gmail.com>",
   "license": "MIT",
   "alias": {
