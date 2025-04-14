@@ -1,54 +1,54 @@
-[![GitHub](https://img.shields.io/badge/License-MIT-brightgreen)](https://github.com/arviantodwi/traefik/blob/master/LICENSE)
+# React + TypeScript + Vite
 
-# sort-algo-react
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Web application to visualize sorting algorithms using ReactJS, Redux and Tailwind CSS.
+Currently, two official plugins are available:
 
-![Screenshot](https://i.imgur.com/MUEqFbr.png)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-### Demo
+## Expanding the ESLint configuration
 
-[https://arviantodwi.github.io/sort-algo-react/](https://arviantodwi.github.io/sort-algo-react/)
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-### Prerequisites
-
-This repository use `yarn` as package manager or you can also use `npm` as an alternative. To build this app you need following dependencies:
-
-- `react`,
-- `redux`,
-- `tailwindcss`,
-- `sass`, and
-- `parcel-bundler`
-
-### Setup
-
-##### 1.1. Download Dependencies
-
-Fork this repository to make a copy in your own GitHub account and clone it to your development environment. Then:
-
-```bash
-# Move to your recently copied app directory
-$ cd your/copied/app/directory
-
-# Use only one of these command below depending on what package manager you use
-$ yarn install  # For yarn
-$ npm install   # For npm
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-##### 1.2. Live Reloading
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-You can enable hot module replacement while developing this app. Your browser will reload automatically every time you make changes and save the files.
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-```bash
-$ yarn watch    # For yarn
-$ npm run watch # For npm
-```
-
-##### 1.3. Build the App for Production
-
-While `watch` is useful for development, it's not good for production use. You need to disable all development features in your app and bundle all of the source files so you can deploy it to your server.
-
-```bash
-$ yarn build    # For yarn
-$ npm run build # For npm
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
 ```
