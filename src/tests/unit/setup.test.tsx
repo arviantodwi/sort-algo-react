@@ -54,9 +54,29 @@ describe('Renders the Setup component', () => {
     expect(elementCount).toBeInTheDocument();
   });
 
-  it('updates the Start Sorting button text content when clicked', () => {
-    const startButton = screen.getByRole('button', { name: /start sorting/i });
-    fireEvent.click(startButton);
-    expect(startButton).toHaveTextContent(/Stop Sorting/i);
+  it('updates the main sort button text content when clicked', async () => {
+    const mainSortButton = screen.getByRole('button', { name: /start sorting/i });
+    fireEvent.click(mainSortButton);
+    expect(mainSortButton).toHaveTextContent(/Stop Sorting/i);
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    fireEvent.click(mainSortButton);
+    expect(mainSortButton).toHaveTextContent(/Start Sorting/i);
+  });
+
+  it('disables the sort algo buttons, randomize button and element slider when sort simulation is running', () => {
+    const mainSortButton = screen.getByRole('button', { name: /start sorting/i });
+    fireEvent.click(mainSortButton);
+
+    const sortTypeButtons = getAllSortTypeButtons();
+    const randomizeButton = screen.getByRole('button', { name: /Randomize/i });
+    const elementsSlider = screen.getByRole('slider');
+
+    sortTypeButtons.forEach((button) => {
+      expect(button).toBeDisabled();
+    });
+    expect(randomizeButton).toBeDisabled();
+    expect(elementsSlider).toHaveAttribute('aria-disabled', 'true');
   });
 });

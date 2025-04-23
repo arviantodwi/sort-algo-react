@@ -30,6 +30,7 @@ export const Setup: FC = () => {
           {Object.entries(SORT_TYPE_LABEL).map(([key, label]) => (
             <Button
               className={sortTypeButton}
+              disabled={isSortStarted}
               key={key}
               type={selectedSortType === (parseInt(key) as SortType) ? 'primary' : 'default'}
               onClick={() => setSelectedSortType(parseInt(key) as SortType)}
@@ -47,6 +48,7 @@ export const Setup: FC = () => {
 
             <Button
               type="default"
+              disabled={isSortStarted}
               size="small"
               onClick={() => {
                 setSortElementCount(randomMultipleOf4());
@@ -63,6 +65,7 @@ export const Setup: FC = () => {
             value={sortElementCount}
             step={4}
             tooltip={{ open: false }}
+            disabled={isSortStarted}
             onChange={(value) => setSortElementCount(value)}
           />
         </Flex>
