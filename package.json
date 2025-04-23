@@ -14,10 +14,12 @@
     "@heroicons/react": "^2.2.0",
     "@linaria/core": "^6.3.0",
     "@linaria/react": "^6.3.0",
+    "@reduxjs/toolkit": "^2.7.0",
     "@wyw-in-js/vite": "^0.6.0",
     "antd": "^5.24.7",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.26.3",
