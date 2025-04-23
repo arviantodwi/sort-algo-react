@@ -1,22 +1,21 @@
 import { PlayIcon, StopIcon } from '@heroicons/react/16/solid';
 import { css } from '@linaria/core';
 import { Button, Card, Flex, Slider } from 'antd';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import {
   DEFAULT_SORT_MAX_ELEMENTS_AMOUNT,
   DEFAULT_SORT_MIN_ELEMENTS_AMOUNT,
-  DEFAULT_SORT_SELECTED_ELEMENTS_AMOUNT,
-  SORT_TYPE_LABEL,
-  SortType,
+  SORT_ALGO_LABEL,
 } from '../../constants/config';
 import { randomMultipleOf4 } from '../../lib/utils';
+import { toggleSortAlgo, updateElementsLength } from '../../store/slices/setupSlice';
+import { startSort, stopSort } from '../../store/slices/sortSlice';
+import { useStoreDispatch, useStoreSelector } from '../../store/store';
 
 export const Setup: FC = () => {
-  const [selectedSortType, setSelectedSortType] = useState<SortType>(SortType.BUBBLE);
-  const [sortElementCount, setSortElementCount] = useState<number>(
-    DEFAULT_SORT_SELECTED_ELEMENTS_AMOUNT
-  );
-  const [isSortStarted, setIsSortStarted] = useState<boolean>(false);
+  const { elementsLength, selectedAlgo } = useStoreSelector('setup');
+  const { isSortRunning } = useStoreSelector('sort');
+  const dispatch = useStoreDispatch();
 
   return (
     <Card variant="borderless" className={container}>
@@ -27,13 +26,15 @@ export const Setup: FC = () => {
         </Flex>
 
         <Flex wrap gap={10}>
-          {Object.entries(SORT_TYPE_LABEL).map(([key, label]) => (
+          {Object.entries(SORT_ALGO_LABEL).map(([key, label]) => (
             <Button
               className={sortTypeButton}
-              disabled={isSortStarted}
-              key={key}
-              type={selectedSortType === (parseInt(key) as SortType) ? 'primary' : 'default'}
-              onClick={() => setSelectedSortType(parseInt(key) as SortType)}
+              disabled={isSortRunning}
+              key={label}
+              type={selectedAlgo === Number(key) ? 'primary' : 'default'}
+              onClick={() => {
+                dispatch(toggleSortAlgo(Number(key)));
+              }}
             >
               {label}
             </Button>
@@ -43,15 +44,15 @@ export const Setup: FC = () => {
         <Flex vertical>
           <Flex gap={10} justify="space-between" align="center">
             <div className={sortElementCounter}>
-              <span className={counterNumber}>{sortElementCount}</span> <span>elements</span>
+              <span className={counterNumber}>{elementsLength}</span> <span>elements</span>
             </div>
 
             <Button
               type="default"
-              disabled={isSortStarted}
+              disabled={isSortRunning}
               size="small"
               onClick={() => {
-                setSortElementCount(randomMultipleOf4());
+                dispatch(updateElementsLength(randomMultipleOf4()));
               }}
             >
               <small>Randomize</small>
@@ -59,25 +60,33 @@ export const Setup: FC = () => {
           </Flex>
 
           <Slider
-            defaultValue={sortElementCount}
+            defaultValue={elementsLength}
             min={DEFAULT_SORT_MIN_ELEMENTS_AMOUNT}
             max={DEFAULT_SORT_MAX_ELEMENTS_AMOUNT}
-            value={sortElementCount}
+            value={elementsLength}
             step={4}
             tooltip={{ open: false }}
-            disabled={isSortStarted}
-            onChange={(value) => setSortElementCount(value)}
+            disabled={isSortRunning}
+            onChange={(value) => {
+              dispatch(updateElementsLength(value));
+            }}
           />
         </Flex>
 
         <Button
           size="large"
           type="primary"
-          icon={isSortStarted ? <StopIcon width={16} /> : <PlayIcon width={16} />}
-          danger={isSortStarted}
-          onClick={() => setIsSortStarted((prev) => !prev)}
+          icon={isSortRunning ? <StopIcon width={16} /> : <PlayIcon width={16} />}
+          danger={isSortRunning}
+          onClick={() => {
+            if (isSortRunning) {
+              return dispatch(stopSort());
+            }
+
+            dispatch(startSort());
+          }}
         >
-          {isSortStarted ? 'Stop sorting' : 'Start sorting'}
+          {isSortRunning ? 'Stop sorting' : 'Start sorting'}
         </Button>
       </Flex>
     </Card>

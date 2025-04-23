@@ -1,12 +1,14 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { Setup } from '../../components/setup/setup';
-import { DEFAULT_SORT_SELECTED_ELEMENTS_AMOUNT, SORT_TYPE_LABEL } from '../../constants/config';
+import { DEFAULT_SORT_SELECTED_ELEMENTS_AMOUNT, SORT_ALGO_LABEL } from '../../constants/config';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
 
 describe('Renders the Setup component', () => {
   function getAllSortTypeButtons() {
     let allButtons: HTMLElement[] = [];
-    const supportedSortLabels = Object.values(SORT_TYPE_LABEL);
+    const supportedSortLabels = Object.values(SORT_ALGO_LABEL);
     supportedSortLabels.forEach((label) => {
       allButtons = [...allButtons, screen.getByRole('button', { name: label })];
     });
@@ -14,7 +16,11 @@ describe('Renders the Setup component', () => {
   }
 
   beforeEach(() => {
-    render(<Setup />);
+    render(
+      <Provider store={store}>
+        <Setup />
+      </Provider>
+    );
   });
 
   it('displays the title', () => {
