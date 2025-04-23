@@ -1,43 +1,22 @@
+import { PlayIcon, StopIcon } from '@heroicons/react/16/solid';
 import { css } from '@linaria/core';
 import { Button, Card, Flex, Slider } from 'antd';
 import { FC, useState } from 'react';
-import { PlayIcon } from '@heroicons/react/16/solid';
-
-enum SortType {
-  BUBBLE,
-  SELECTION,
-  INSERTION,
-  MERGE,
-}
-
-const sortTypeLabel = {
-  [SortType.BUBBLE]: 'Bubble Sort',
-  [SortType.SELECTION]: 'Selection Sort',
-  [SortType.INSERTION]: 'Insertion Sort',
-  [SortType.MERGE]: 'Merge Sort',
-};
-
-const MIN_ELEMENTS = 12;
-const MAX_ELEMENTS = 120;
-const DEFAULT_ELEMENTS = 32;
+import {
+  DEFAULT_SORT_MAX_ELEMENTS_AMOUNT,
+  DEFAULT_SORT_MIN_ELEMENTS_AMOUNT,
+  DEFAULT_SORT_SELECTED_ELEMENTS_AMOUNT,
+  SORT_TYPE_LABEL,
+  SortType,
+} from '../../constants/config';
+import { randomMultipleOf4 } from '../../lib/utils';
 
 export const Setup: FC = () => {
   const [selectedSortType, setSelectedSortType] = useState<SortType>(SortType.BUBBLE);
-  const [sortElementCount, setSortElementCount] = useState<number>(DEFAULT_ELEMENTS);
-
-  // Generate a random number between min and max that is divisible by 4
-  function randomMultipleOf4(): number {
-    // Ensure min and max are divisible by 4
-    const adjustedMin = Math.ceil(MIN_ELEMENTS / 4) * 4;
-    const adjustedMax = Math.floor(MAX_ELEMENTS / 4) * 4;
-
-    // Calculate the number of possible values
-    const possibleValues = (adjustedMax - adjustedMin) / 4 + 1;
-    // Generate a random index and convert to a value
-    const randomIndex = Math.floor(Math.random() * possibleValues);
-
-    return adjustedMin + randomIndex * 4;
-  }
+  const [sortElementCount, setSortElementCount] = useState<number>(
+    DEFAULT_SORT_SELECTED_ELEMENTS_AMOUNT
+  );
+  const [isSortStarted, setIsSortStarted] = useState<boolean>(false);
 
   return (
     <Card variant="borderless" className={container}>
@@ -48,7 +27,7 @@ export const Setup: FC = () => {
         </Flex>
 
         <Flex wrap gap={10}>
-          {Object.entries(sortTypeLabel).map(([key, label]) => (
+          {Object.entries(SORT_TYPE_LABEL).map(([key, label]) => (
             <Button
               className={sortTypeButton}
               key={key}
@@ -79,8 +58,8 @@ export const Setup: FC = () => {
 
           <Slider
             defaultValue={sortElementCount}
-            min={MIN_ELEMENTS}
-            max={MAX_ELEMENTS}
+            min={DEFAULT_SORT_MIN_ELEMENTS_AMOUNT}
+            max={DEFAULT_SORT_MAX_ELEMENTS_AMOUNT}
             value={sortElementCount}
             step={4}
             tooltip={{ open: false }}
@@ -88,8 +67,14 @@ export const Setup: FC = () => {
           />
         </Flex>
 
-        <Button size="large" type="primary" icon={<PlayIcon width={16} />}>
-          Start Sorting
+        <Button
+          size="large"
+          type="primary"
+          icon={isSortStarted ? <StopIcon width={16} /> : <PlayIcon width={16} />}
+          danger={isSortStarted}
+          onClick={() => setIsSortStarted((prev) => !prev)}
+        >
+          {isSortStarted ? 'Stop sorting' : 'Start sorting'}
         </Button>
       </Flex>
     </Card>
