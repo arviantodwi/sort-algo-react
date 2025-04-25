@@ -31,3 +31,24 @@ export function randomMultipleOf4(
 
   return adjustedMin + randomIndex * 4;
 }
+
+/**
+ * Generates an array of random integers representing element heights in percentages.
+ * Each value ranges from 1 to 100.
+ *
+ * @param {number} elementsLength - The number of elements to generate.
+ * @returns {number[]} An array of integers from 1 to 100 representing element heights.
+ */
+export function generateElements(elementsLength: number): number[] {
+  let elements: number[] = [];
+
+  while (elements.length < elementsLength) {
+    // The number represents the element's height as a percentage of its container.
+    // For example, n = 50 means 50% height.
+    const n = Math.floor(Math.random() * 100) + 1;
+    // array.push(n > 2 ? n : 2);
+    elements = [...elements, n];
+  }
+
+  return elements;
+}
