@@ -98,6 +98,8 @@ const container = css`
   top: 24px;
   right: 24px;
   width: 300px;
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.75);
 `;
 
 const sortTypeButton = css`

@@ -1,17 +1,22 @@
-import { css } from "@linaria/core";
+import { css } from '@linaria/core';
 
 export default css`
   :global() {
     :root {
     }
 
-    html {
+    html,
+    body,
+    #root {
+      width: 100%;
+      height: 100%;
     }
 
     body {
-      font-family: "Work Sans", system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-        "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      font-family: 'Work Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial,
+        sans-serif;
       font-optical-sizing: auto;
       font-size: var(--font-size-base);
     }
@@ -35,7 +40,7 @@ export default css`
     }
 
     input {
-      font-family: "Work Sans";
+      font-family: 'Work Sans';
     }
 
     img {
@@ -47,9 +52,9 @@ export default css`
     }
 
     pre code {
-      font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-        "Roboto Mono", "Oxygen Mono", "Ubuntu Mono", "Source Code Pro",
-        "Fira Mono", "Droid Sans Mono", "Consolas", "Courier New", monospace;
+      font-family: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono',
+        'Oxygen Mono', 'Ubuntu Mono', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Consolas',
+        'Courier New', monospace;
     }
   }
 `;
